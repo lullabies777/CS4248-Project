@@ -5,7 +5,7 @@ I found related tutorial online and this demo reproduces the work of https://acl
 
 In order to run the demo successfully, you have to download the pre-trained word vectors, which is available at https://nlp.stanford.edu/projects/glove/. I used `glove.6B.300d.txt` in this demo, remember to decompress this text file into the `data` folder.
 
-
+### Codes for ATAE-LSTM (Two subclasses: `Attention` and `Final_pred`)
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/2896592/1647354744981-e5100037-9bed-49e9-9aba-276f16915410.png#clientId=ua89ebd79-5fab-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=747&id=ub47bb506&margin=%5Bobject%20Object%5D&name=image.png&originHeight=747&originWidth=1595&originalType=binary&ratio=1&rotation=0&showTitle=false&size=158965&status=done&style=none&taskId=uedccfdfc-4788-440b-94ca-78268c7cb5b&title=&width=1595)
 ```python
 class ATAE_LSTM(nn.Module):
