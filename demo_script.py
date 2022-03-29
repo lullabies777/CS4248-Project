@@ -49,7 +49,7 @@ term_vector=term.vocab.vectors
 
 # %%
 # batch_size=512
-batch_size=16
+batch_size=8
 train_iter, val_iter = data.Iterator.splits(
             (train, val),
             sort_key=lambda x: len(x.text),
@@ -179,10 +179,10 @@ def train(train_iter, test_iter, net, loss, optimizer, num_epochs):
             X2 = X2.unsqueeze(1).cuda()
             y.data.sub_(1)  # index start from 0
             y_hat = net(X1,X2)
-            # y_hat = y_hat.logits
+            y_hat = y_hat[0][:,0,:]
+            y_hat = y_hat.squeeze(1)
             # y_hat = torch.argmax(y_hat, dim=-1)
-            print(y_hat[0].shape, y.shape, X1.shape, X2.shape)
-            l = loss(y_hat[0], y)
+            l = loss(y_hat, y)
 
             optimizer.zero_grad()
             l.backward()
@@ -203,7 +203,6 @@ embedding_dim, num_hiddens, num_layers = 300, 150, 1
 # net = ATAE_LSTM(embedding_dim, num_hiddens, num_layers).cuda()
 cur_dir_path = os.path.dirname(os.path.abspath(__file__)) # Added
 model_path = os.path.join(cur_dir_path, 'DeBERTa_model', 'base') # Added
-# net = SequenceClassificationModel(pre_trained=model_path).cuda() # Added
 net = DebertaV2Model.from_pretrained(os.path.join(model_path, 'pytorch.model.bin'), config=os.path.join(model_path, 'model_config.json')).cuda()
 print(net)
 lr, num_epochs = 0.001, 20
