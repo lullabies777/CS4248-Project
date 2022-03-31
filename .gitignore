@@ -23,7 +23,10 @@
 
 # ignore an entire directory
 /checkpoints/
-
+/.ipynb_checkpoints/
+/.vector_cache/
+/DeBERTa_model/
+/Fine_tune_BERT/
 # ignore a file type
 *.pt
 *.txt
